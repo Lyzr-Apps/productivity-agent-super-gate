@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { FiTarget, FiUser, FiSend } from 'react-icons/fi'
+import { callAIAgent } from '@/lib/aiAgent'
 
 // Theme Variables - Forest Light
 const THEME_VARS = {
@@ -131,17 +132,22 @@ export default function Home() {
     setIsLoading(true)
 
     try {
-      const response = await fetch('/api/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message }),
-      })
+      // Use aiAgent.ts for AI integration
+      const result = await callAIAgent(message, '698e317243d49bda6d7c03a1')
 
-      if (!response.ok) {
-        throw new Error('Failed to get response')
+      if (!result.success) {
+        throw new Error(result.error || 'Failed to get response')
       }
 
-      const data: AgentResponse = await response.json()
+      // Parse response according to schema
+      const agentData = result.response.result || {}
+
+      const data: AgentResponse = {
+        coaching_advice: typeof agentData.coaching_advice === 'string' ? agentData.coaching_advice : '',
+        actionable_steps: Array.isArray(agentData.actionable_steps) ? agentData.actionable_steps : [],
+        relevant_frameworks: Array.isArray(agentData.relevant_frameworks) ? agentData.relevant_frameworks : [],
+        follow_up_suggestions: Array.isArray(agentData.follow_up_suggestions) ? agentData.follow_up_suggestions : [],
+      }
 
       const agentMessage: Message = {
         id: `agent-${Date.now()}`,
