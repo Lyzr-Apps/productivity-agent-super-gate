@@ -1,0 +1,36 @@
+{
+  "agent_name": "Productivity Coach Agent",
+  "agent_id": "698e317243d49bda6d7c03a1",
+  "description": "Provides on-demand coaching for task prioritization, time management, focus strategies, goal setting, habit building, and information filtering. Maintains conversation context to deliver personalized, actionable productivity advice.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "result": {
+      "coaching_advice": "string",
+      "actionable_steps": [
+        "string"
+      ],
+      "relevant_frameworks": [
+        "string"
+      ],
+      "follow_up_suggestions": [
+        "string"
+      ]
+    }
+  },
+  "example_response": {
+    "result": {
+      "coaching_advice": "The main productivity coaching response",
+      "actionable_steps": [
+        "sample string"
+      ],
+      "relevant_frameworks": [
+        "sample string"
+      ],
+      "follow_up_suggestions": [
+        "sample string"
+      ]
+    }
+  }
+}

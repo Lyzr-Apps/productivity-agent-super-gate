@@ -1,0 +1,48 @@
+{
+  "workflow_type": "single_agent",
+  "agents": [
+    {
+      "agent_id": "698e317243d49bda6d7c03a1",
+      "name": "Productivity Coach Agent",
+      "type": "text",
+      "description": "Provides on-demand coaching for task prioritization, time management, focus strategies, goal setting, habit building, and information filtering",
+      "provider": "OpenAI",
+      "model": "gpt-4.1",
+      "temperature": 0.6,
+      "top_p": 0.95,
+      "has_memory": true,
+      "tools": [],
+      "response_schema_file": "response_schemas/productivity_coach_agent_response.json"
+    }
+  ],
+  "knowledge_bases": [],
+  "schedules": [],
+  "workflow_nodes": [
+    {
+      "id": "input_node",
+      "type": "Input",
+      "label": "User Query"
+    },
+    {
+      "id": "productivity_coach_agent",
+      "type": "Agent",
+      "label": "Productivity Coach Agent",
+      "agent_id": "698e317243d49bda6d7c03a1"
+    },
+    {
+      "id": "output_node",
+      "type": "Output",
+      "label": "Coaching Response"
+    }
+  ],
+  "workflow_edges": [
+    {
+      "source": "input_node",
+      "target": "productivity_coach_agent"
+    },
+    {
+      "source": "productivity_coach_agent",
+      "target": "output_node"
+    }
+  ]
+}
